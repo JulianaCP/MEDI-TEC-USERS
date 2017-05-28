@@ -34,7 +34,8 @@ public class MedicamentosFragment extends Fragment {
     MenuInflater inflayer;
     int posicionItemPopuMenuPresionado;
     ArrayList<String> listaEnfermedadMedicamentos = new ArrayList<>();
-    List<Medicamentos>listaReporteBase;
+    //List<Medicamentos>listaReporteBase;
+    ListaMedicamento listaMedicamento;
     ListView enfermedadesMedicamentos_lista_listView_medicamentos;
     ArrayAdapter<String> adapter;
 
@@ -59,11 +60,11 @@ public class MedicamentosFragment extends Fragment {
         call.enqueue(new Callback<List<Medicamentos>>() {
             @Override
             public void onResponse(Call<List<Medicamentos>> call, Response<List<Medicamentos>> response) {
-                listaReporteBase = response.body();
-                for (int i = 0; i < listaReporteBase.size(); i++)
+                listaMedicamento = new ListaMedicamento(response.body());
+                for (int i = 0; i < listaMedicamento.getMedicamentos().size(); i++)
                 {
-                    Medicamentos nuevo4= new Medicamentos(listaReporteBase.get(i).getIdMedicamento(),
-                            listaReporteBase.get(i).getNombre(),listaReporteBase.get(i).getDescripcion() );
+                    Medicamentos nuevo4= new Medicamentos(listaMedicamento.getMedicamentos().get(i).getIdMedicamento(),
+                            listaMedicamento.getMedicamentos().get(i).getNombre(),listaMedicamento.getMedicamentos().get(i).getDescripcion() );
                     listaEnfermedadMedicamentos.add(nuevo4.getNombre());
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -88,11 +89,11 @@ public class MedicamentosFragment extends Fragment {
         call.enqueue(new Callback<List<Medicamentos>>() {
             @Override
             public void onResponse(Call<List<Medicamentos>> call, Response<List<Medicamentos>> response) {
-                listaReporteBase = response.body();
-                for (int i = 0; i < listaReporteBase.size(); i++)
+                listaMedicamento = new ListaMedicamento(response.body());
+                for (int i = 0; i < listaMedicamento.getMedicamentos().size(); i++)
                 {
-                    Medicamentos nuevo4= new Medicamentos(listaReporteBase.get(i).getIdMedicamento(),
-                            listaReporteBase.get(i).getNombre(),listaReporteBase.get(i).getDescripcion() );
+                    Medicamentos nuevo4= new Medicamentos(listaMedicamento.getMedicamentos().get(i).getIdMedicamento(),
+                            listaMedicamento.getMedicamentos().get(i).getNombre(),listaMedicamento.getMedicamentos().get(i).getDescripcion() );
                     listaEnfermedadMedicamentos.add(nuevo4.getNombre());
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -151,7 +152,7 @@ public class MedicamentosFragment extends Fragment {
         enfermedadesMedicamentos_lista_listView_medicamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Global.idActual = listaReporteBase.get(position).getIdMedicamento();
+                Global.idActual = listaMedicamento.getMedicamentos().get(position).getIdMedicamento();
                 mostrarPopuMenu(view);
             }
         });

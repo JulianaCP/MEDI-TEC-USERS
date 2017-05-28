@@ -34,7 +34,8 @@ public class SintomasFragment extends Fragment {
     int posicionItemPopuMenuPresionado;
     ArrayList<String> listaEnfermedadSintomas = new ArrayList<>();
 
-    List<Sintomas>listaReporteBase;
+    //List<Sintomas>listaReporteBase;
+    ListaSintomas listaSintomas;
 
     ListView enfermedadesSintomas_lista_listView_sintomas;
     ArrayAdapter<String> adapter;
@@ -117,11 +118,11 @@ public class SintomasFragment extends Fragment {
         call.enqueue(new Callback<List<Sintomas>>() {
             @Override
             public void onResponse(Call<List<Sintomas>> call, Response<List<Sintomas>> response) {
-                listaReporteBase = response.body();
-                for (int i = 0; i < listaReporteBase.size(); i++)
+                listaSintomas = new ListaSintomas(response.body());
+                for (int i = 0; i < listaSintomas.getSintomas().size(); i++)
                 {
-                    Sintomas nuevo4= new Sintomas(listaReporteBase.get(i).getIdSintoma(),
-                            listaReporteBase.get(i).getNombre());
+                    Sintomas nuevo4= new Sintomas(listaSintomas.getSintomas().get(i).getIdSintoma(),
+                            listaSintomas.getSintomas().get(i).getNombre());
                     listaEnfermedadSintomas.add(nuevo4.getNombre());
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -153,7 +154,7 @@ public class SintomasFragment extends Fragment {
         enfermedadesSintomas_lista_listView_sintomas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Global.idActual = listaReporteBase.get(position).getIdSintoma();
+                Global.idActual = listaSintomas.getSintomas().get(position).getIdSintoma();
                 mostrarPopuMenu(view);
             }
         });

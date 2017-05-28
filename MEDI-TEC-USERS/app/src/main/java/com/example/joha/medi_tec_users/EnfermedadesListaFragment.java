@@ -35,7 +35,8 @@ public class EnfermedadesListaFragment extends Fragment {
     ArrayList<String> listaEnfermedades= new ArrayList<>();
     ListView enfermedades_lista_listView_enfermedades;
     ArrayAdapter<String> adapter;
-    List<Enfermedades>listaReporteBase;
+    ListaEnfermedad listaEnfermedad;
+
 
     public EnfermedadesListaFragment() {
         // Required empty public constructor
@@ -59,11 +60,11 @@ public class EnfermedadesListaFragment extends Fragment {
         call.enqueue(new Callback<List<Enfermedades>>() {
             @Override
             public void onResponse(Call<List<Enfermedades>> call, Response<List<Enfermedades>> response) {
-                listaReporteBase = response.body();
-                for (int i = 0; i < listaReporteBase.size(); i++)
+                listaEnfermedad = new ListaEnfermedad(response.body());
+                for (int i = 0; i < listaEnfermedad.getEnfermedades().size(); i++)
                 {
-                    Enfermedades nuevo4= new Enfermedades(listaReporteBase.get(i).getIdEnfermedad(),
-                            listaReporteBase.get(i).getNombre(),listaReporteBase.get(i).getDescripcion());
+                    Enfermedades nuevo4= new Enfermedades(listaEnfermedad.getEnfermedades().get(i).getIdEnfermedad(),
+                            listaEnfermedad.getEnfermedades().get(i).getNombre(),listaEnfermedad.getEnfermedades().get(i).getDescripcion());
                     listaEnfermedades.add(nuevo4.getNombre());
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -87,11 +88,11 @@ public class EnfermedadesListaFragment extends Fragment {
         call.enqueue(new Callback<List<Enfermedades>>() {
             @Override
             public void onResponse(Call<List<Enfermedades>> call, Response<List<Enfermedades>> response) {
-                listaReporteBase = response.body();
-                for (int i = 0; i < listaReporteBase.size(); i++)
+                listaEnfermedad = new ListaEnfermedad(response.body());
+                for (int i = 0; i < listaEnfermedad.getEnfermedades().size(); i++)
                 {
-                    Enfermedades nuevo4= new Enfermedades(listaReporteBase.get(i).getIdEnfermedad(),
-                            listaReporteBase.get(i).getNombre(),listaReporteBase.get(i).getDescripcion());
+                    Enfermedades nuevo4= new Enfermedades(listaEnfermedad.getEnfermedades().get(i).getIdEnfermedad(),
+                            listaEnfermedad.getEnfermedades().get(i).getNombre(),listaEnfermedad.getEnfermedades().get(i).getDescripcion());
                     listaEnfermedades.add(nuevo4.getNombre());
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -115,11 +116,11 @@ public class EnfermedadesListaFragment extends Fragment {
         call.enqueue(new Callback<List<Enfermedades>>() {
             @Override
             public void onResponse(Call<List<Enfermedades>> call, Response<List<Enfermedades>> response) {
-                listaReporteBase = response.body();
-                for (int i = 0; i < listaReporteBase.size(); i++)
+                listaEnfermedad = new ListaEnfermedad(response.body());
+                for (int i = 0; i < listaEnfermedad.getEnfermedades().size(); i++)
                 {
-                    Enfermedades nuevo4= new Enfermedades(listaReporteBase.get(i).getIdEnfermedad(),
-                            listaReporteBase.get(i).getNombre(),listaReporteBase.get(i).getDescripcion());
+                    Enfermedades nuevo4= new Enfermedades(listaEnfermedad.getEnfermedades().get(i).getIdEnfermedad(),
+                            listaEnfermedad.getEnfermedades().get(i).getNombre(),listaEnfermedad.getEnfermedades().get(i).getDescripcion());
                     listaEnfermedades.add(nuevo4.getNombre());
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -155,7 +156,7 @@ public class EnfermedadesListaFragment extends Fragment {
         enfermedades_lista_listView_enfermedades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Global.idActual = listaReporteBase.get(position).getIdEnfermedad();
+                Global.idActual = listaEnfermedad.getEnfermedades().get(position).getIdEnfermedad();
                 mostrarPopuMenu(view);
             }
         });

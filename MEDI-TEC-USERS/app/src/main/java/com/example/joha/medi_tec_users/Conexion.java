@@ -11,11 +11,11 @@ public class Conexion {
     private final Retrofit retrofit;
     private Servidor servidor;
 
-    public static String baseURL = "http://172.24.42.140:8090";
+    public static String baseURL = "http://172.24.40.67:8090";
 
 
     public Conexion() {
-        this.baseurl = "http://172.24.42.140:8090";
+        this.baseurl = "http://172.24.40.67:8090";
         this.retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create()).build();
         this.servidor = retrofit.create(Servidor.class);
     }

@@ -2,15 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.joha.medi_tec_users.EnfermedadesListaFragment">
+    tools:context="com.example.joha.medi_tec_users.LogoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <ListView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background=""
-        android:id="@+id/enfermedades_lista_listView_enfermedades"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_height="match_parent"
+        android:src="@drawable/robot"/>
 
 </FrameLayout>

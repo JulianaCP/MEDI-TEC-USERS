@@ -9,7 +9,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background=""
+        android:background="@color/colorPrimary"
         android:id="@+id/enfermedades_lista_listView_enfermedades"
         android:layout_gravity="center_horizontal|top" />
 

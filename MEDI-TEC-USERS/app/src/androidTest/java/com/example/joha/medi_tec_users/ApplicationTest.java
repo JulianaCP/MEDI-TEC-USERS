@@ -1,4 +1,4 @@
-package com.example.pruebas.medi_tec_admin;
+package com.example.joha.medi_tec_users;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
